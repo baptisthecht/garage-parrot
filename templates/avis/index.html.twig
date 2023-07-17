@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/vnd.icon" href="{{ asset('assets/img/favicon.ico') }}" />
+    <link rel="apple-touch-icon" type="image/vnd.icon" href="{{ asset('assets/img/favicon.ico') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Avis - Garage Parrot</title>
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+</head>
+
+
+
+<nav class="navbar navbar-light navbar-expand-md sticky-top navbar-shrink py-3" id="mainNav">
+    <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><img style="width: 100px;" class="rounded img-fluid fit-cover mx-2" src="{{ asset('assets/img/logo.png') }}" style="height: 250px;margin-bottom: 10px;"><span>Garage Parrot</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link " href="/">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="/occasions">Occasions</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#">Avis</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+            </ul>
+            {% if app.user %}
+                <a class="btn btn-primary py-2 px-3 shadow" role="button" href="/profile">{{ app.user.prenom }} {{ app.user.nom }} {% if is_granted('ROLE_ADMIN') %}<br/><span style="font-size: 0.8rem">Administrateur</span>{% elseif is_granted('ROLE_EMPLOYEE') %}<br/><span style="font-size: 0.8rem">Employé</span>{% endif %}</a>
+            {% else %}
+                <a class="btn btn-primary py-2 px-3 shadow" role="button" href="/login">Connexion</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+<section class="py-5">
+    <div>
+        <div>
+            {% for flash_message in app.session.flashBag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashBag.get('danger') %}
+                <div class="alert alert-danger">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashBag.get('warning') %}
+                <div class="alert alert-warning">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container py-3">
+        <div class="row mb-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold">Avis</h2>
+                <p class="text-muted">Voici une liste des avis que nous avons récolté. Vous pouvez poster le votre via le bouton suivant.</p>
+                {% if is_granted('ROLE_ADMIN') %}
+                <div class="alert alert-primary" role="alert">
+                    Info : Vous êtes actuellement connecté en tant qu'administrateur, vous voyez donc les avis vérifiés ainsi que les nouveaux avis, vous pouvez les accepter ou les rejeter. Pour des raisons de véracité, il vous est impossible de modifier un avis client. Les avis sont triés du plus récent au plus ancien.
+                </div>
+                {% endif %}
+                <a style="font-size: 1rem;" class="btn py-2 px-3 btn-primary text-center" href="{{ path('avis.add', {id: 0}) }}">Ajouter un avis</a>
+            </div>
+        </div>
+        <div class="row g-0 row-cols-1 row-cols-md-2 row-cols-xl-3 mx-auto" style="max-width: 900px;">
+
+    {%  for avi in avis|reverse %}
+            {% if avi.isVerified == false %}
+                {% if is_granted('ROLE_ADMIN') %}
+            <div class="col-md-12 col-lg-12 col-xl-12 text-start mb-5">
+                <div class="card bg-light border-light p-2">
+                    {% if avi.isPositive %}
+                    <div class="card-body text-start p-4 pb-2" style="margin-right: -2px;"><span class="badge bg-dark mb-2">Positif </span>
+                    {% endif %}
+                    {% if avi.isPositive == false %}
+                    <div class="card-body text-start p-2" style="margin-right: -2px;"><span class="badge bg-danger mb-2">Négatif</span>
+                    {% endif %}
+                    <span style="margin-left: 10px" class="badge bg-danger mb-2">Non vérifié</span>
+                        <span style="margin-left: 10px" class="badge bg-dark mb-2">{{ avi.Note }} / 5</span>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h3 style="padding-top: 10px;" class="fw-bold mb-0">{{ avi.senderfirstname}} {{ avi.senderlastname }}</h3>
+                                <p class="mb-4" style="padding-top: 10px;">{{ avi.comment }}</p>
+                            </div>
+                        </div>
+                        <a href="{{ path('avis.accept', {id: avi.id}) }}" class="btn btn-dark d-block w-100" style="margin-bottom: 10px;" type="button">Valider l&#39;avis</a>
+                        <a href="{{ path('avis.delete', {id: avi.id}) }}" class="btn d-block w-100" type="button">Rejeter l&#39;avis</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% else %}
+                <div class="col-md-12 col-lg-12 col-xl-12 text-start mb-5">
+                    <div class="card bg-light border-light p-2">
+                        {% if avi.isPositive %}
+                        <div class="card-body text-start p-4" style="margin-right: -2px;"><span class="badge bg-dark mb-2">Positif</span>
+                            {% endif %}
+                            {% if avi.isPositive == false %}
+                            <div class="card-body text-start p-4" style="margin-right: -2px;"><span class="badge bg-danger mb-2">Négatif</span>
+                                {% endif %}
+                                    <span style="margin-left: 10px"  class="badge bg-dark mb-2">Vérifié</span>
+                                <span style="margin-left: 10px" class="badge bg-dark mb-2">{{ avi.Note }} / 5</span>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h3 style="padding-top: 10px;" class="fw-bold mb-0">{{ avi.senderfirstname}} {{ avi.senderlastname }}</h3>
+                                        <p style="padding-top: 10px;">{{ avi.comment }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {% endif %}
+
+    {% endfor %}
+
+
+                </div></div></div></div>
+</section>
+{{ include('footer.html.twig') }}
+<script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="assets/js/bold-and-bright.js"></script>
+</body>
+
+</html>

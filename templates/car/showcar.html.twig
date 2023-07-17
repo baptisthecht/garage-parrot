@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/vnd.icon" href="{{ asset('assets/img/favicon.ico') }}" />
+    <link rel="apple-touch-icon" type="image/vnd.icon" href="{{ asset('assets/img/favicon.ico') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>{{ car.brand }} {{ car.model }} - Garage Parrot</title>
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+</head>
+
+<body>
+<nav class="navbar navbar-light navbar-expand-md sticky-top navbar-shrink py-3" id="mainNav">
+    <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><img style="width: 100px;" class="rounded img-fluid fit-cover mx-2" src="{{ asset('assets/img/logo.png') }}" style="height: 250px;margin-bottom: 10px;"><span>Garage Parrot</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link " href="/">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/occasions">Occasions</a></li>
+                <li class="nav-item"><a class="nav-link " href="/avis">Avis</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+            </ul>
+            {% if app.user %}
+                <a class="btn btn-primary py-2 px-3 shadow" role="button" href="/profile">{{ app.user.prenom }} {{ app.user.nom }} {% if is_granted('ROLE_ADMIN') %}<br/><span style="font-size: 0.8rem">Administrateur</span>{% elseif is_granted('ROLE_EMPLOYEE') %}<br/><span style="font-size: 0.8rem">Employé</span>{% endif %}</a>
+            {% else %}
+                <a class="btn btn-primary py-2 px-3 shadow" role="button" href="/login">Connexion</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+<section>
+    <div class="container py-5">
+        <div>
+            <div>
+                {% for flash_message in app.session.flashBag.get('success') %}
+                    <div class="alert alert-success">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+                {% for flash_message in app.session.flashBag.get('danger') %}
+                    <div class="alert alert-danger">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+                {% for flash_message in app.session.flashBag.get('warning') %}
+                    <div class="alert alert-warning">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row" style="max-width: 900px;margin: auto;">
+            <div class="col d-flex justify-content-between" style="margin-bottom: 50px;"><a href="/occasions" class="btn btn-primary" type="button">Retour à la liste</a>{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_EMPLOYEE') %}{% if car is not null %}<a href="/occasions/edit/{{ car.id }}"  class="btn btn-light" type="button">Modifier l'annonce</a><a href="/occasions/delete/{{ car.id }}"  class="btn btn-primary" type="button">Supprimer l'annonce</a>{% endif %} {% endif %}</div>
+        </div>
+        {% if car is not null %}
+        <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
+            <div class="col mb-5" ><img style="height: 300px;" class="rounded fit-cover w-100 shadow" src="{{ asset('assets/uploads/cars/' ~ car.mainImage) }}"></div>
+            <div class="col d-md-flex align-items-md-end align-items-lg-center mb-5">
+                <div>
+                    <h5 class="fw-bold">{{ car.brand}} {{ car.model }}</h5>
+                    <h5 class="fw-bold">{{ car.year }} • {{ car.km }} km</h5><span class="badge bg-primary mb-2">{{ car.energy }}</span>
+                    <p class="text-muted mb-4">{{ car.commentaire }}</p>
+                    <h5 class="fw-bold" style="text-align: right;color: var(--bs-red);font-size: 34px;">{% if car.price is not divisible by 1 %}
+                            {{ car.price|number_format(2, '.', ' ') }}
+                        {% else %}
+                            {{ car.price|number_format(0, '.', ' ') }}
+                        {% endif %} €</h5>
+                </div>
+            </div>
+        </div>
+
+        {% if car.img2 and car.img3 and car.img4 %}
+        <div class="row row-cols-1 row-cols-md-3 mx-auto" style="max-width: 900px;">
+            <div class="col"><img style="height: 300px;" class="rounded fit-cover w-100 shadow" src="{{ asset('assets/uploads/cars/' ~ car.img2) }}"></div>
+            <div class="col"><img style="height: 300px;" class="rounded fit-cover w-100 shadow" src="{{ asset('assets/uploads/cars/' ~ car.img3) }}"></div>
+            <div class="col"><img style="height: 300px;" class="rounded fit-cover w-100 shadow" src="{{ asset('assets/uploads/cars/' ~ car.img4) }}"></div>
+        </div>
+        {% endif %}
+
+        {% if car.img2 and car.img3 and car.img4 == NULL %}
+            <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
+                <div class="col"><img style="height: 300px;" class="rounded fit-cover w-100 shadow" src="{{ asset('assets/uploads/cars/' ~ car.img2) }}"></div>
+                <div class="col"><img style="height: 300px;" class="rounded fit-cover w-100 shadow" src="{{ asset('assets/uploads/cars/' ~ car.img3) }}"></div>
+            </div>
+        {% endif %}
+
+        {% if car.img3 and car.img4 and car.img2 == NULL %}
+            <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
+                <div class="col"><img style="height: 300px;" class="rounded fit-cover w-100 shadow" src="{{ asset('assets/uploads/cars/' ~ car.img3) }}"></div>
+                <div class="col"><img style="height: 300px;" class="rounded fit-cover w-100 shadow" src="{{ asset('assets/uploads/cars/' ~ car.img4) }}"></div>
+            </div>
+        {% endif %}
+
+        {% if car.img2 and car.img4 and car.img3 == NULL %}
+            <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
+                <div class="col"><img style="height: 300px;" class="rounded fit-cover w-100 shadow" src="{{ asset('assets/uploads/cars/' ~ car.img2) }}"></div>
+                <div class="col"><img style="height: 300px;" class="rounded fit-cover w-100 shadow" src="{{ asset('assets/uploads/cars/' ~ car.img4) }}"></div>
+            </div>
+        {% endif %}
+
+        {% if car.img2 and car.img3 == NULL and car.img4 == NULL %}
+            <div class="row row-cols-1 mx-auto" style="max-width: 900px;">
+                <div class="col"><img style="height: 300px;" class="rounded fit-cover w-100 shadow" src="{{ asset('assets/uploads/cars/' ~ car.img2 ) }}"></div>
+            </div>
+        {% endif %}
+
+        {% if car.img3 and car.img2 == NULL and car.img4 == NULL %}
+            <div class="row row-cols-1 mx-auto" style="max-width: 900px;">
+                <div class="col"><img style="height: 300px;" class="rounded fit-cover w-100 shadow" src="{{ asset('assets/uploads/cars/' ~ car.img3 ) }}"></div>
+            </div>
+        {% endif %}
+
+        {% if car.img4 and car.img2 == NULL and car.img3 == NULL %}
+            <div class="row row-cols-1 mx-auto" style="max-width: 900px;">
+                <div class="col"><img style="height: 300px;" class="rounded fit-cover w-100 shadow" src="{{ asset('assets/uploads/cars/' ~ car.img4 ) }}"></div>
+            </div>
+        {% endif %}
+
+
+        <div class="row" style="max-width: 900px;margin: auto;">
+            <div class="col">
+                <div style="box-shadow: 0px 0px 40px 1px rgb(190,190,190);border-radius: 18px;padding: 50px;margin-bottom: 100px;margin-top: 50px;">
+                    <h5 class="fw-bold" style="text-align: center;margin-bottom: 20px;">Caractéristiques de : {{ car.brand }} {{ car.model }}</h5>
+                    <div class="table-responsive" style="border-radius: 25px;">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Caractéristiques techniques</th>
+                                <th>{{ car.brand }} {{ car.model }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Année</td>
+                                <td>{{ car.year }}</td>
+                            </tr>
+                            <tr>
+                                <td>Kilométrage</td>
+                                <td>{{ car.km|number_format(0, '.', ' ') }}</td>
+                            </tr>
+                            <tr>
+                                <td>Énergie</td>
+                                <td>{{ car.energy    }}</td>
+                            </tr>
+                            <tr>
+                                <td>Puissance</td>
+                                <td>{{ car.power }} cv</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h5 class="fw-bold" style="text-align: center;margin-bottom: 20px; margin-top: 50px">Options disponibles sur : {{ car.brand }} {{ car.model }}</h5>
+                    <div class="table-responsive" style="border-radius: 25px;">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Option</th>
+                                <th>{{ car.brand }} {{ car.model }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Type de boite</td>
+                                <td>{% if car.auto %} Automatique {% else %} Manuelle {% endif %}</td>
+                            </tr>
+                            <tr>
+                                <td>Centralisation</td>
+                                <td>{% if car.centralisation %} Oui {% else %} Non {% endif %}</td>
+                            </tr>
+                            <tr>
+                                <td>Régulateur & Limitateur de vitesse</td>
+                                <td>{% if car.reglimvitesse %} Oui {% else %} Non {% endif %}</td>
+                            </tr>
+                            <tr>
+                                <td>Climatisation</td>
+                                <td>{% if car.climatisation %} Oui {% else %} Non {% endif %}</td>
+                            </tr>
+                            <tr>
+                                <td>Toît ouvrant</td>
+                                <td>{% if car.toitouvrant %} Oui {% else %} Non {% endif %}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="max-width: 900px;margin: auto;">
+            <div class="col">
+                <div>
+                    <h5 class="fw-bold" style="text-align: center;font-size: 19px;color: rgb(222,88,88);">Un coup de coeur ?</h5>
+                    <h5 class="fw-bold" style="text-align: center;font-size: 24px;">Contactez-nous pour plus d'informations</h5>
+                    <p class="fw-bold text-center" style="margin-bottom: 50px;">Nous sommes diponibles aux horaires d'ouverture au <a href="tel: 0362535667">0362535667</a>, par email à l'addresse <a href="mailto: garage@parrot.com">garage@parrot.com</a> ou via le formulaire suivant.</p>
+                </div>
+                {{ form_start(form) }}
+                <div class="row">
+                    <div class="col">        {{ form_row(form.Prenom, {'label' : 'Prénom'}) }}</div>
+                    <div class="col">        {{ form_row(form.Nom, {'label' : 'Nom'}) }}</div>
+                </div>
+                {{ form_row(form.email, {'label' : 'Adresse mail'}) }}
+                {{ form_row(form.phone, {'label' : 'Numéro de téléphone'}) }}
+                {{ form_row(form.subject, {'label' : 'Sujet du message'}) }}
+                {{ form_row(form.message    , {'label' : 'Message'}) }}
+                {{ form_row(form.Envoyer, {'label' : 'Envoyer le message'}) }}
+            </div>
+        </div>
+    </div>
+</section>
+{% else %}
+    <div class="row mb-5">
+        <div class="col-md-8 col-xl-6 text-center mx-auto">
+            <h2 class="fw-bold">Erreur</h2>
+            <p class="text-muted">Le véhicule n'existe pas.</p>
+        </div>
+    </div>
+{% endif %}
+{{ include('footer.html.twig') }}
+<script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="assets/js/bold-and-bright.js"></script>
+</body>
+
+</html>

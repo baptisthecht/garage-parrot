@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<sc lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/vnd.icon" href="{{ asset('assets/img/favicon.ico') }}" />
+    <link rel="apple-touch-icon" type="image/vnd.icon" href="{{ asset('assets/img/favicon.ico') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Occasions - Garage Parrot</title>
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+</head>
+
+
+
+<nav class="navbar navbar-light navbar-expand-md sticky-top navbar-shrink py-3" id="mainNav">
+    <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><img style="width: 100px;" class="rounded img-fluid fit-cover mx-2" src="{{ asset('assets/img/logo.png') }}" style="height: 250px;margin-bottom: 10px;"><span>Garage Parrot</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link " href="/">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#">Occasions</a></li>
+                <li class="nav-item"><a class="nav-link " href="/avis">Avis</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+            </ul>
+            {% if app.user %}
+                <a class="btn btn-primary py-2 px-3 shadow" role="button" href="/profile">{{ app.user.prenom }} {{ app.user.nom }} {% if is_granted('ROLE_ADMIN') %}<br/><span style="font-size: 0.8rem">Administrateur</span>{% elseif is_granted('ROLE_EMPLOYEE') %}<br/><span style="font-size: 0.8rem">Employé</span>{% endif %}</a>
+            {% else %}
+                <a class="btn btn-primary py-2 px-3 shadow" role="button" href="/login">Connexion</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+<section class="py-5">
+    <div>
+        <div>
+            {% for flash_message in app.session.flashBag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashBag.get('danger') %}
+                <div class="alert alert-danger">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashBag.get('warning') %}
+                <div class="alert alert-warning">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-10 col-xl-8 text-center mx-auto">
+                <p class="fw-bold mb-2" style="color: rgb(217, 119, 127);">Occasions</p>
+                <h2 class="fw-bold"><strong>Nos véhicules d'occasions.</strong></h2>
+                <p class="text-muted mb-5">Trouvez celui qui vous correspond.</p>
+                {% if app.user %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div class="alert alert-primary" role="alert">
+                            Info : Vous êtes actuellement connecté en tant qu'administrateur, vous pouvez donc ajouter, modifier ou supprimer des annonces via les boutons associés.
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                                <a style="font-size: 1rem;" class="btn py-2 px-3 btn-primary text-center" href="/occasions/edit/0">Ajouter un véhicule</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-primary" role="alert">
+                            Info : Vous êtes actuellement connecté en tant qu'employé, vous pouvez donc ajouter, modifier ou supprimer des annonces via les boutons associés.
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                                <a style="font-size: 1rem;" class="btn py-2 px-3 btn-primary text-center" href="/occasions/edit/0">Ajouter un véhicule</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                <div  class="px-5 py-3" style="box-shadow: 0px 0px 40px 1px #bfbfbfc0;padding-top: 25px;border-radius: 15px;">
+                    <form id="filters">
+                        <div class="row">
+                            <div class="col-lg-10 offset-lg-0" style="margin-right: auto;margin-left: auto;">
+                                <h6 class="fw-bold my-2 mb-4" style="color: rgb(220, 99, 117);">Filtrer les résultats</h6>
+                                <div class="justify-content-center align-items-center d-block d-lg-flex" style="margin-bottom: 10px;">
+                                    <div class="form-check mx-2"><input name="energies[]" class="form-check-input " type="checkbox" value="1" id="1"><label class="form-check-label" for="1">Essence</label></div>
+                                    <div class="form-check mx-2"><input name="energies[]" class="form-check-input " type="checkbox" value="2" id="2"><label class="form-check-label" for="2">Diesel</label></div>
+                                    <div class="form-check mx-2"><input name="energies[]" class="form-check-input " type="checkbox" value="3" id="3"><label class="form-check-label" for="3">GPL</label></div>
+                                    <div class="form-check mx-2"><input name="energies[]" class="form-check-input " type="checkbox" value="4" id="4"><label class="form-check-label" for="4">Ethanol</label></div>
+                                    <div class="form-check mx-2"><input name="energies[]" class="form-check-input " type="checkbox" value="5" id="5"><label class="form-check-label" for="5">Electrique</label></div>
+                                    <div class="form-check mx-2"><input name="energies[]" class="form-check-input " type="checkbox" value="6" id="6"><label class="form-check-label" for="6">Hybride</label></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row d-lg-flex justify-content-lg-center">
+                            <div class="col col-lg-3 col-10 mx-auto" style="padding: 10px;">
+                                <div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>Année : </p>
+                                        <p><output id="valueyr"></output> à 2023</p>
+                                    </div>
+                                    <input value="1990" min="1990" max="2023" step="1" id="yearimput" name="year" class="form-range" type="range">
+                                </div>
+                            </div>
+                            <div class="col col-lg-3 col-10 mx-auto" style="padding: 10px;">
+                                <div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>Km :</p>
+                                        <p> de 0 à <output id="valuekm">500000</output> km</p>
+                                    </div>
+                                    <input value="500000" min="0" max="500000" step="5000" id="imputkm" name="kms" class="form-range" type="range">
+
+                                </div>
+                            </div>
+                            <div class="col col-lg-3 col-10 mx-auto" style="padding: 10px;">
+                                <div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>Prix :</p>
+                                        <p> de 0€ à <output id="valueprice">100000</output> €</p>
+                                    </div>
+                                    <input value="100000" min="500" max="100000" step="500" id="inputprice" name="price" class="form-range" type="range">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-2 mx-auto" id="content" style="max-width: 1200px;">
+            {% include "car/_content.html.twig" %}
+        </div>
+    </div>
+</section>
+    {{ include('footer.html.twig') }}
+<script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/bold-and-bright.js') }}"></script>
+    <script src="{{ asset('assets/js/filters.js') }}"></script>
+    <script>
+        const valueyear = document.querySelector("#valueyr");
+        const inputyear = document.querySelector("#yearimput");
+        valueyear.textContent = inputyear.value;
+        inputyear.addEventListener("input", (event) => {
+            valueyear.textContent = event.target.value;
+        });
+
+        const valuekm = document.querySelector("#valuekm");
+        const inputkm = document.querySelector("#imputkm");
+        valuekm.textContent = valuekm.value;
+        inputkm.addEventListener("input", (event) => {
+            valuekm.textContent = event.target.value;
+        });
+
+        const valueprice = document.querySelector("#valueprice");
+        const inputprice = document.querySelector("#inputprice");
+        valueprice.textContent = valueprice.value;
+        inputprice.addEventListener("input", (event) => {
+            valueprice.textContent = event.target.value;
+        });
+
+    </script>
+</body>
+
+</html>

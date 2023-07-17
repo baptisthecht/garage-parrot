@@ -1,0 +1,20 @@
+{% for car in cars %}
+    <div class="col mb-4" style="padding: 20px;">
+        <div style="box-shadow: 0px 0px 40px #a7a7a7c0;border-radius: 24px;padding-top: 40px;padding-right: 40px;padding-bottom: 15px;padding-left: 40px;"><a href="#"><img class="rounded img-fluid shadow w-100 fit-cover" src="{{ asset('assets/uploads/cars/' ~ car.mainImage) }}" style="height: 250px;margin-bottom: 10px;"></a>
+            <div class="py-4"><span class="badge bg-primary mb-2" style="font-size: 15px;">{{ car.energy }}</span><span class="badge bg-primary mb-2" style="margin-right: 10px;margin-left: 10px;font-size: 15px;">{{ car.year }}</span><span class="badge bg-primary mb-2" style="font-size: 15px;">{{ car.km}} km</span>
+                <h4 class="fw-bold" style="margin-top: 10px;margin-bottom: 10px;">{{ car.brand }} {{ car.model }}</h4>
+                <p class="text-muted">{{ car.commentaire }}</p>
+                <h4 class="fw-bold d-flex" style="margin-top: 5px;"></h4>
+                <h1 style="color: var(--bs-link-color);padding-right: 15px;"></h1>
+                <div class="d-flex flex-row justify-content-between align-items-center"><a href="/occasions/{{ car.id }}" class="btn btn-primary" type="button">Voir le véhicule</a>
+                    <h4 class="fw-bold" style="margin-top: 5px;font-size: 31px;color: var(--bs-link-color);padding-right: 10px;">
+                        {% if car.price is not divisible by 1 %}
+                            {{ car.price|number_format(2, '.', ' ') }}
+                        {% else %}
+                            {{ car.price|number_format(0, '.', ' ') }}
+                        {% endif %} €</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,104 @@
+
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/vnd.icon" href="{{ asset('assets/img/favicon.ico') }}" />
+    <link rel="apple-touch-icon" type="image/vnd.icon" href="{{ asset('assets/img/favicon.ico') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Ajouter un véhicule - Garage Parrot</title>
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+</head>
+
+<body>
+<nav class="navbar navbar-light navbar-expand-md sticky-top navbar-shrink py-3" id="mainNav">
+    <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><img style="width: 100px;" class="rounded img-fluid fit-cover mx-2" src="{{ asset('assets/img/logo.png') }}" style="height: 250px;margin-bottom: 10px;"><span>Garage Parrot</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link " href="/">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/occasions" >Occasions</a></li>
+                <li class="nav-item"><a class="nav-link " href="/avis">Avis</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+            </ul>
+            {% if app.user %}
+            <a class="btn btn-primary py-2 px-3 shadow" role="button" href="/profile">{{ app.user.prenom }} {{ app.user.nom }} {% if is_granted('ROLE_ADMIN') %}<br/><span style="font-size: 0.8rem">Administrateur</span>{% elseif is_granted('ROLE_EMPLOYEE') %}<br/><span style="font-size: 0.8rem">Employé</span>{% endif %}</a>
+            {% else %}
+                <a class="btn btn-primary py-2 px-3 shadow" role="button" href="/login">Connexion</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+<section>
+    <div class="container py-5">
+        {%if is_granted('ROLE_ADMIN') or is_granted('ROLE_EMPLOYEE')%}
+        <div class="row" style="max-width: 900px;margin: auto;">
+            {% if car.id %}
+                <div class="col" style="margin-bottom: 50px;"><a class="btn btn-primary" href="{{ path('cars.show', {'id': car.id}) }}" type="button">Retour à l'annonce</a></div>
+            {% else %}
+                <div class="col" style="margin-bottom: 50px;"><a class="btn btn-primary" href="/occasions" type="button">Retour à la liste</a></div>
+            {% endif %}
+        </div>
+        {% if car.id != null %}
+            <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
+                <div class="col mb-5" ><img style="height: 300px;" class="rounded fit-cover w-100 shadow" src="{{ asset('assets/uploads/cars/' ~ car.mainImage) }}"></div>
+                <div class="col d-md-flex align-items-md-end align-items-lg-center mb-5">
+                    <div>
+                        <h5 class="fw-bold">{{ car.brand}} {{ car.model }}</h5>
+                        <h5 class="fw-bold">{{ car.year }} • {{ car.km }} km</h5><span class="badge bg-primary mb-2">{{ car.energy }}</span>
+                        <p class="text-muted mb-4">{{ car.commentaire }}</p>
+                        <h5 class="fw-bold" style="text-align: right;color: var(--bs-red);font-size: 34px;">{% if car.price is not divisible by 1 %}
+                                {{ car.price|number_format(2, '.', ' ') }}
+                            {% else %}
+                                {{ car.price|number_format(0, '.', ' ') }}
+                            {% endif %} €</h5>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="example-wrapper" style="max-width: 900px;margin: auto;">
+            {{ form_start(form) }}
+
+
+            <div class="row">
+                <div class="col">        {{ form_row(form.Brand, {'label' : 'Marque'}) }}</div>
+                <div class="col">        {{ form_row(form.Model, {'label' : 'Modèle'}) }}</div>
+            </div>
+
+            {{ form_row(form.Year, {'label' : 'Année de fabrication'}) }}
+            {{ form_row(form.KM, {'label' : 'Kilométrage'}) }}
+            {{ form_row(form.Price, {'label' : 'Prix de vente'}) }}
+            {{ form_row(form.power, {'label' : 'Puissance (en cv)'}) }}
+            {{ form_row(form.energy, {'label' : "Type d'énergie"}) }}
+            {{ form_row(form.commentaire, {'label' : "Description de l'annonce"}) }}
+            {{ form_row(form.mainImage, {'label' : "Image principale de l'annonce (obligatoire)"}) }}
+            <div class="row">
+                <div class="col">        {{ form_row(form.img2, {'label' : 'Autres images (optionnel)'}) }}</div>
+                <div class="col">        {{ form_row(form.img3, {'label' : ' '}) }}</div>
+                <div class="col">        {{ form_row(form.img4, {'label' : ' '}) }}</div>
+            </div>
+            {{ form_row(form.Auto, {'label' : 'Boite automatique'}) }}
+            {{ form_rest(form) }}
+
+        </div>
+    </div>
+    {% else %}
+        <div class="row mb-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold">Plus un geste !</h2>
+                <p class="text-muted">Vous n'êtes pas autorisé à acceder à cette page.</p>
+                <div class="col" style="margin-bottom: 50px;"><a class="btn btn-primary" href="/occasions" type="button">Retour à la liste</a></div>
+            </div>
+        </div>
+    {% endif %}
+</section>
+{{ include('footer.html.twig') }}
+<script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="assets/js/bold-and-bright.js"></script>
+</body>
+
+    </html>
+
+
