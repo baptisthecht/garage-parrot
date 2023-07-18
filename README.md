@@ -1,14 +1,14 @@
 # Garage Parrot 🚗
 ## 👩‍💻 Évaluation de formation Studi
-Ce projet a été créé dans le cadre d'une *Évaluation en Cours de Formation* dans le cadre d'une formation **Développeur web full stack** chez [Studi](https://www.studi.com/fr/formation/developpement/graduate-developpeur-web-full-stack)
+Ce projet a été créé dans le cadre d'une *Évaluation en Cours de Formation* dans le cadre d'une formation **Développeur web full stack** chez [Studi](https://www.studi.com/fr/formation/developpement/graduate-developpeur-web-full-stack).
 
 
 ## 🚀 Déploiement du projet en local
 
-* Clonez ce dépot dans le dossier */htdocs* de votre instance de XAMPP.
-* Créez une base de donnée sur phpmyadmin et migrez les données via le fichier SQL fourni *(en utilisant la fonction Importer ou un logiciel type : Oracle WorkBench)*.
-* Ajoutez les variables d'environnement dans le fichier .env.
-* Installez les dépendances de symfony pour ce projet avec la commande :
+* Clonez ce dépot dans le dossier `/htdocs` de votre instance de **XAMPP**.
+* Créez une base de donnée sur *phpmyadmin* et migrez les données via le [fichier SQL fourni](https://github.com/baptisthecht/garage-parrot/blob/master/Documentation/1-garageparrot.sql) *(en utilisant la fonction Importer ou un logiciel type : [Oracle WorkBench](https://docs.oracle.com/cd/E17952_01/workbench-en/index.html))*.
+* Ajoutez les variables d'environnement dans le fichier `.env`.
+* Installez les dépendances de **Symfony** pour ce projet avec la commande :
 
 ```bash
   composer install
@@ -21,8 +21,8 @@ ou
 ```bash
   symfony serve
 ```
-* Ouvrez votre navigateur à l'adresse : **http://localhost:8000/**
-* Le site du Garage Parrot devrait maintenant s'afficher ! Pour qu'il n'ait plus de secret pour vous, référez-vous au [manuel d'utilisation](https://github.com/baptisthecht/garage-parrot/blob/master/Documentation/Manuel.pdf).
+* Ouvrez votre **navigateur** à l'adresse : http://localhost:8000
+* Le site du *Garage Parrot* devrait maintenant s'afficher ! Pour qu'il n'ait plus aucun secret pour vous, référez-vous au [manuel d'utilisation](https://github.com/baptisthecht/garage-parrot/blob/master/Documentation/Manuel.pdf).
 * Pour tester les modes **administrateurs** et **employés**, des comptes *'exemples'* ont été créés et insérés dans la base de donnée :
 | Identifiant de connexion | Mot de passe     | Type de compte                       |
 | :-------- | :------- | :-------------------------------- |
