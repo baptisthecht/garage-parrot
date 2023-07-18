@@ -7,8 +7,8 @@ Ce projet a été créé dans le cadre d'une *Évaluation en Cours de Formation*
 ## Déploiement du projet en local
 
 * Clonez ce dépot dans le dossier `/htdocs` de votre instance de XAMPP.
-* Créez une base de donnée sur phpmyadmin et migrez les données via le fichier SQL fourni *(en utilisant la fonction Importer ou un logiciel type : Oracle WorkBench)*.
-* Ajoutez les variables d'environnement dans le fichier .env.
+* Créez une base de donnée sur phpmyadmin et migrez les données via le [fichier SQL](https://github.com/baptisthecht/garage-parrot/blob/master/Documentation/1-garageparrot.sql) fourni *(en utilisant la fonction Importer ou un logiciel type : [Oracle WorkBench](https://docs.oracle.com/cd/E17952_01/workbench-en/index.html))*.
+* Ajoutez les variables d'environnement dans le fichier `.env`.
 * Installez les dépendances de symfony pour ce projet avec la commande :
 
 ```bash
