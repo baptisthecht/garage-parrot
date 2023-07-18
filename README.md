@@ -40,4 +40,4 @@ ou
 * [Diagramme de classe [PNG]](https://github.com/baptisthecht/garage-parrot/blob/master/Documentation/6-Diagramme%20de%20classe.png)
 * [Fonctions d'utilisation [PNG]](https://github.com/baptisthecht/garage-parrot/blob/master/Documentation/7-Fonctions%20d'utilisation.png)
 * [Manuel d'utilisation [PDF]](https://github.com/baptisthecht/garage-parrot/blob/master/Documentation/Manuel.pdf)
-* [Fichier de rédaction de requêtes SQL [SQL.md](https://github.com/baptisthecht/garage-parrot/blob/master/Documentation/SQL.md)
+* [Fichier de rédaction de requêtes SQL [SQL.md]](https://github.com/baptisthecht/garage-parrot/blob/master/Documentation/SQL.md)
