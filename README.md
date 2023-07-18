@@ -24,10 +24,10 @@ ou
 * Ouvrez votre **navigateur** à l'adresse : http://localhost:8000
 * Le site du *Garage Parrot* devrait maintenant s'afficher ! Pour qu'il n'ait plus aucun secret pour vous, référez-vous au [manuel d'utilisation](https://github.com/baptisthecht/garage-parrot/blob/master/Documentation/Manuel.pdf).
 * Pour tester les modes **administrateurs** et **employés**, des comptes *'exemples'* ont été créés et insérés dans la base de donnée :
-| Identifiant de connexion | Mot de passe     | Type de compte                       |
-| :------------------------| :--------------- | :----------------------------------- |
-| `v.parrot@gmail.com`     | `password`       | **Administrateur**                   |
-| `j.philippe@gmail.com`   | `password`       | Employé                              |
+| Identifiant | Mot de passe | Type de compte |
+| ------ | ------ | ------ |
+| v.parrot@gmail.com | passsword | **Administrateur**
+| J.philippe@gmail.com  | password | Employé
 
 ## 📫 Annexes / Documents complémentaires
 
