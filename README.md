@@ -1,7 +1,7 @@
 
 # Garage Parrot
 ## Évaluation de formation Studi
-Ce projet a été créé dans le cadre d'une *Évaluation en Cours de Formation* dans le cadre d'une formation **Développeur web full stack** chez [Studi](https://www.studi.com/fr/formation/developpement/graduate-developpeur-web-full-stack)
+Ce projet a été créé dans le cadre d'une *Évaluation en Cours de Formation* dans le cadre d'une formation **Développeur web full stack** chez [Studi](https://www.studi.com/fr/formation/developpement/graduate-developpeur-web-full-stack).
 
 
 ## Déploiement du projet en local
