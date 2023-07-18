@@ -41,3 +41,4 @@ ou
 * [Fonctions d'utilisation [PNG]](https://github.com/baptisthecht/garage-parrot/blob/master/Documentation/7-Fonctions%20d'utilisation.png)
 * [Manuel d'utilisation [PDF]](https://github.com/baptisthecht/garage-parrot/blob/master/Documentation/Manuel.pdf)
 * [Fichier de rédaction de requêtes SQL [SQL.md]](https://github.com/baptisthecht/garage-parrot/blob/master/Documentation/SQL.md)
+  > Le fichier de migration SQL étant généré par phpmyadmin, j'ai rédigé ce fichier par moi-même afin de valider la compétence du titre professionnel associé.
