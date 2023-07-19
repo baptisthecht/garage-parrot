@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : mar. 18 juil. 2023 à 11:35
+-- Généré le : mer. 19 juil. 2023 à 00:18
 -- Version du serveur : 5.7.39
 -- Version de PHP : 8.2.0
 
@@ -42,15 +42,11 @@ CREATE TABLE `avis` (
 --
 
 INSERT INTO `avis` (`id`, `sender_first_name`, `sender_last_name`, `is_positive`, `comment`, `is_verified`, `note_id`) VALUES
-(1, 'Baptist', 'HECHT', 1, 'J\'ai été extrêmement bien accueilli dans ce garage, réparation au top, prix attractifs, je conseille !', 1, 6),
-(2, 'Baptist', 'HECHT', 0, 'J\'ai été extrêmement bien accueilli dans ce garage, réparation au top, prix attractifs, je conseille !', 1, 5),
-(3, 'Baptist', 'HECHT', 1, 'J\'ai été extrêmement bien accueilli dans ce garage, réparation au top, prix attractifs, je conseille !', 1, 6),
-(4, 'Baptist', 'HECHT', 0, 'Bien !', 1, 4),
-(5, 'Baptist', 'HECHT', 1, 'Bien !', 1, 2),
-(6, 'ba', 'ba', 0, 'salt', 1, 4),
-(7, 'Baptist', 'Hct', 1, 'Bien dans l\'ensemble', 1, 5),
-(8, 'Martin', 'Buriez', 1, 'Très bien', 1, 5),
-(10, 'a', 'a', 1, 'a', 0, 3);
+(1, 'Baptist', 'HECHT', 1, 'J\'ai été extrêmement bien accueilli dans ce garage, réparation au top, prix attractifs !', 1, 6),
+(11, 'Jean', 'Dubois', 1, 'Super, le vendeur était très accueillant ! Je n\'ai cependant pas trouvé mon bonheur..', 1, 5),
+(12, 'Théo', 'Henri', 0, 'On m\'annonce un délai d\'un mois pour changer mes amortisseurs... Pas du tout satisfait !', 1, 2),
+(13, 'Guillaume', 'Lamblin', 1, 'J\'ai acheté mon véhicule il y a 2 mois maintenant et j\'en suis entièrement satisfait ! Je conseille à tous.', 1, 6),
+(14, 'Julio', 'Pellegrini', 1, 'Bien, vendeur agréable, belles voitures, top !', 0, 5);
 
 -- --------------------------------------------------------
 
@@ -84,14 +80,11 @@ CREATE TABLE `car` (
 --
 
 INSERT INTO `car` (`id`, `brand`, `model`, `price`, `year`, `km`, `main_image`, `climatisation`, `centralisation`, `reg_lim_vitesse`, `auto`, `toit_ouvrant`, `commentaire`, `img2`, `img3`, `img4`, `power`, `energy_id`) VALUES
-(1, 'Peugeot', '308 GTi', 35000.5, 2021, 2000, 'car1-64b0869f70452.jpg', 1, 1, 1, 1, 0, 'Avec 272 ch, la 308 GTI devient une compacte sportive alléchante, d\'autant qu\'elle dispose d\'un vrai différentiel à glissement limité.', 'car3-64b0869f706d0.jpg', 'images-64b086906c7d1.jpg', 'images-64b0869f70866.jpg', '53', 2),
-(2, 'Peugeot', '308', 32000, 2021, 2000, 'images-64b1cc0169b80.jpg', 1, 0, 1, 1, 1, 'Avec 272 ch, la 308 GTI devient une compacte sportive alléchante, d\'autant qu\'elle dispose d\'un vrai différentiel à glissement limité.', '1957904-jpg-64b086fccda4c.webp', NULL, 'Peugeot308GTI-60-64b086fccddaa.jpg', '360', 5),
-(3, 'Peugeot', '308', 35000, 2021, 2000, 'Peugeot308GTI-60-64aed9ebcde27.jpg', 1, 1, 1, 1, 0, 'Avec 272 ch, la 308 GTI devient une compacte sportive alléchante, d\'autant qu\'elle dispose d\'un vrai différentiel à glissement limité.', NULL, NULL, NULL, '', 1),
-(4, 'Lamborghini', 'Aventador', 100000, 2019, 32000, 'car2-64b1bd022bbe9.jpg', 1, 0, 1, 1, 0, 'Avec 877 ch, l\'Aventador devient une compacte sportive alléchante, d\'autant qu\'elle dispose d\'un vrai différentiel à glissement limité.', NULL, NULL, NULL, '890', 1),
-(5, 'Opel', 'Corsa', 37000, 2023, 1000, 'Unknown-64b087948e77b.jpg', 1, 1, 1, 1, 1, 'Nouvelle calandre, nouveaux phares, boucliers redessinés… le restylage de l’Opel Corsa ne passe pas inaperçu. Celle-ci dispose de la nouvelle signature visuelle « Opel Vizor ».', NULL, NULL, NULL, '230', 5),
-(6, 'Fiat', '500 Hybrid', 4000, 2016, 120000, 'fiat-64b08766f0f1a.jpg', 1, 1, 0, 0, 1, 'Fiat 500 Hybrid est dotée de diverses fonctionnalités technologiques pour vous aider à conduire de manière plus sûre et ainsi profiter au mieux de votre temps à bord.', NULL, NULL, NULL, '140', 6),
-(8, 'Opel', 'Astra', 2500, 2001, 230000, 'car2-64b1527583a9a.jpg', 1, 0, 0, 0, 0, 'Voici une voiture', NULL, NULL, NULL, '105', 3),
-(9, 'GL', 'P', 10, 2015, 20000, 'kickstarter-64b3dc857fdb0.png', 0, 0, 0, 0, 0, 'GPL', NULL, NULL, NULL, '10', 3);
+(1, 'Peugeot', 'e208', 37000, 2022, 2000, 'Peugeot-e-208-restylee-2023-014-9-64b72739b7ff8.jpg', 1, 1, 1, 1, 0, 'Lancée en octobre 2019, la Peugeot e-208 vient concurrencer la Renault ZOE sur le segment des citadines. La e-208 est la première voiture électrique de la marque au lion.', '2214696-652bg8atsm-scaled-64b72739b8270.jpg', 'peugeot-208-big-w770-64b72739b8444.jpg', 'peugeot-e-208-2023-3-64b72739b85a3.jpg', '210', 5),
+(2, 'Peugeot', '308', 32000, 2021, 2000, 'peugeot-308-5p-2021-m-1-64b7283ba0682.jpg', 1, 0, 1, 1, 1, 'Avec 160 ch, la nouvelle 308 devient une compacte sportive alléchante, d\'autant qu\'elle dispose d\'un vrai différentiel à glissement limité.', 'peugeot-308-testdrive-0921tc-187-64b7283ba091f.webp', '2-64b7283ba0ca4.jpg', 'NAZ-9e118ba48e654d14b782e819cc876738-64b7283ba0e5c.webp', '160', 2),
+(4, 'Lamborghini', 'Aventador', 100000, 2019, 32000, 'car2-64b728af2006d.jpg', 1, 1, 1, 0, 0, 'Avec 890 ch, la Lamborghini Aventador devient LE monstre par excellence, rien, pas même un avion de chasse ne vous fera de tord.', NULL, NULL, NULL, '890', 1),
+(5, 'Opel', 'Corsa', 37000, 2023, 1000, 'opel-corsa-electric-2023-64b728ea1b676.jpg', 1, 1, 1, 1, 1, 'Nouvelle calandre, nouveaux phares, boucliers redessinés… le restylage de l’Opel Corsa ne passe pas inaperçu. Celle-ci dispose de la nouvelle signature visuelle « Opel Vizor ».', '2023-opel-corsa-facelift-7-64b728ea1b8bc.jpg', 'Opel-Corsa-2023-facelift-5-64b728ea1bac3.jpg', NULL, '230', 5),
+(6, 'Fiat', '500 Hybrid', 4000, 2016, 120000, 'ak22096-64b727bf2288a.jpg', 1, 1, 0, 1, 1, 'Fiat 500 Hybrid est dotée de diverses fonctionnalités technologiques pour vous aider à conduire de manière plus sûre et ainsi profiter au mieux de votre temps à bord.', NULL, NULL, NULL, '140', 6);
 
 -- --------------------------------------------------------
 
@@ -138,12 +131,7 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`id`, `nom`, `prenom`, `email`, `phone`, `subject`, `message`, `lu`) VALUES
-(1, 'HECHT', 'Baptist', 'hechtbaptist@gmail.com', '0614716071', 'Sujet', 'Message', 1),
-(2, 'HECHT', 'Baptist', 'hechtbaptist@gmail.com', '0614716071', 'Sujet', 'Message', 1),
-(3, 'Parrot', 'Vincent', 'v.parrot@gmail.com', '0612345678', 'Au sujet de Peugeot 308 de 2021', 'Bonjour,', 1),
-(4, 'Parrot', 'Vincent', 'v.parrot@gmail.com', '0612345678', 'Au sujet de Peugeot 308 de 2021', 'Bonjour, je vous contacte car j\'aimerai avoir des photos de l\'intérieur (TDB et sièges) s\'il vous plait, Merci', 0),
-(5, 'HECHT', 'Baptist', 'me@baptisthecht.fr', '0614716071', 'Au sujet de Peugeot 308 de 2021', 'Test', 0),
-(6, 'HECHT', 'Baptist', 'me@baptisthecht.fr', '0614716071', 'Au sujet de Peugeot 308 de 2021', 'Test', 0);
+(4, 'Parrot', 'Vincent', 'v.parrot@gmail.com', '0612345678', 'Au sujet de Peugeot 308 de 2021', 'Bonjour, je vous contacte car j\'aimerai avoir des photos de l\'intérieur (TDB et sièges) s\'il vous plait, Merci', 0);
 
 -- --------------------------------------------------------
 
@@ -253,12 +241,12 @@ CREATE TABLE `service` (
 --
 
 INSERT INTO `service` (`id`, `name`, `description`, `available`, `image`, `type_de_service_id`) VALUES
-(1, 'Vidange', 'Remplacement de l\'huile et des filtres', 0, 'car2-64b2a73350409.jpg', 1),
-(2, 'Bougies', 'Remplacement des bougies d\'allumage ou de préchauffage.', 1, 'car1-64b1cb896c403.jpg', 2),
-(3, 'Pneus', 'Remplacement des pneumatiques de votre véhicule (par deux)', 1, 'fiat-64afda9023a90.jpg', 3),
-(4, 'Freins', 'Changement de vos disques et plaquettes de freins avant', 1, 'car2-64add0267329e.jpg', 2),
-(5, 'Décalaminage', 'Décalaminage du moteur pour tout type de moteur diesel', 1, 'car3-64add03203043.jpg', 4),
-(21, 'Pare-brise', 'Remplacement de votre pare-brise en cas d\'impact ou de brisure', 1, 'images-64b2a780475cb.jpg', 3);
+(1, 'Vidange', 'Remplacement de l\'huile et de tout les filtres du véhicule.', 0, 'faire-une-vidange-dune-voiture-64b72a780bdd1.webp', 2),
+(2, 'Bougies', 'Remplacement des bougies d\'allumage ou de préchauffage.', 1, 'Unknown-64b72a8a940dc.jpg', 1),
+(3, 'Pneus', 'Remplacement des pneumatiques de votre véhicule (par deux)', 1, 'mains-seulement-mecanicien-tenant-pneu-au-garage-reparation-remplacement-pneus-hiver-ete-146671-16784-jpg-64b72a991e81a.avif', 2),
+(4, 'Freins', 'Changement de vos disques et plaquettes de freins avant', 1, 'disque-frein-ventile-main-13186753-64b72ac81fd98.jpg', 2),
+(5, 'Décalaminage', 'Décalaminage du moteur pour tout type de moteur diesel', 1, 'qu-est-ce-que-le-decalaminage-moteur-681-64b72b1691fb3.jpg', 2),
+(21, 'Pare-brise', 'Remplacement de votre pare-brise en cas d\'impact ou de brisure', 1, 'dreamstime-s-19403267-64b72b0e545a2.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -303,8 +291,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `prenom`, `nom`) VALUES
 (1, 'v.parrot@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$1s24qhwaODI.HN7gvXns0.0AZ.zuzJV1sxki/X6YMTwI2w7kKHWc.', 'Vincent', 'Parrot'),
 (2, 'j.philippe@gmail.com', '[\"ROLE_EMPLOYEE\"]', '$2y$13$dpEPKHVHr8qQBXC2vLkM8uQdzLbHap1Wv85NAzhbfoYRBzVzTJ5Yu', 'Jean', 'Philippe'),
-(3, 'ba@gmail.com', '[\"ROLE_EMPLOYEE\"]', '$2y$13$a5dSMuYsREs5kY.x5n08C.5vZNrsW/s80jpqopbWYLES3SAgu45l.', 'Baptist', 'HECHT'),
-(6, 'da@da.dada', '[\"ROLE_EMPLOYEE\"]', '$2y$13$duUtXpKQCMTqtxod3S7RJenzPoXkdRydOKfl4vuUTW8a3q7mLKwqa', 'da', 'da');
+(3, 'ba@gmail.com', '[\"ROLE_EMPLOYEE\"]', '$2y$13$a5dSMuYsREs5kY.x5n08C.5vZNrsW/s80jpqopbWYLES3SAgu45l.', 'Baptist', 'HECHT');
 
 --
 -- Index pour les tables déchargées
@@ -391,7 +378,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `avis`
 --
 ALTER TABLE `avis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `car`
