@@ -2,6 +2,12 @@
 
 Voici un fichier résumant les requêtes SQL rédigées afin de créer les tables associées aux entités présentes dans le projet **Symfony**.
 
+Précisions :
+* `tinyint(1)` correspond à une **variable booléenne** en SQL.
+* ``double` correspond à un **nombre flottant** (précis à 10^-15).
+* `varchar(255)` correspond à une **variable string** de longueur *255 max*.
+* `time` correspond à une **variable de temps**.
+
 ### Table : Car 
 
 Création de la table :
