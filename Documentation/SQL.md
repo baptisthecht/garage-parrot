@@ -3,8 +3,8 @@
 Voici un fichier résumant les requêtes SQL rédigées afin de créer les tables associées aux entités présentes dans le projet **Symfony**.
 
 Précisions :
-* `tinyint(1)` correspond à une **variable booléenne** en SQL.
-* `double` correspond à un **nombre flottant** (précis à 10^-15).
+* `tinyint(1)` correspond à une **variable booléenne** en SQL. `bit` aurait également pu être utilisé.
+* `float` correspond à un **nombre flottant**. `double` aurait pu également être utilisé pour plus de précision.
 * `varchar(255)` correspond à une **variable string** de longueur *255 max*.
 * `time` correspond à une **variable de temps**.
 
@@ -17,7 +17,7 @@ CREATE TABLE 'car' (
   'id' int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   'brand' varchar(255)  NOT NULL,
   'model' varchar(255)  NOT NULL,
-  'price' double NOT NULL,
+  'price' float NOT NULL,
   'year' int(11) NOT NULL,
   'km' int(11) NOT NULL,
   'main_image' varchar(255)  NOT NULL,
