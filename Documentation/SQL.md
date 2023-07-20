@@ -4,7 +4,7 @@ Voici un fichier résumant les requêtes SQL rédigées afin de créer les table
 
 Précisions :
 * `tinyint(1)` correspond à une **variable booléenne** en SQL.
-* ``double` correspond à un **nombre flottant** (précis à 10^-15).
+* `double` correspond à un **nombre flottant** (précis à 10^-15).
 * `varchar(255)` correspond à une **variable string** de longueur *255 max*.
 * `time` correspond à une **variable de temps**.
 
